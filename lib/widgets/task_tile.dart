@@ -8,7 +8,7 @@ class TaskTile extends StatelessWidget {
   const TaskTile({
     super.key,
     required this.task,
-    this.onCompleted,
+    this.onCompleted, required Row child,
   });
 
   final Task task;
@@ -59,19 +59,30 @@ class TaskTile extends StatelessWidget {
               ),
             ],
           )),
-          Checkbox(
-            value: task.isCompleted,
-            onChanged: onCompleted,
-            checkColor: colors.surface,
-            // fillColor: MaterialStateProperty.resolveWith<Color>(
-            //   (Set<MaterialState> states) {
-            //     if (states.contains(MaterialState.disabled)) {
-            //       return colors.primary;
-            //     }
-            //     return colors.primary;
-            //   },
-            // ),
-          ),
+
+Switch(
+  value: task.isCompleted, // Current state of the task
+  onChanged: onCompleted,
+  activeColor: colors.surface, // Color when the switch is on
+),
+
+
+
+
+
+          // Checkbox(
+          //   value: task.isCompleted,
+          //   onChanged: onCompleted,
+          //   checkColor: colors.surface,
+          //   // fillColor: MaterialStateProperty.resolveWith<Color>(
+          //   //   (Set<MaterialState> states) {
+          //   //     if (states.contains(MaterialState.disabled)) {
+          //   //       return colors.primary;
+          //   //     }
+          //   //     return colors.primary;
+          //   //   },
+          //   // ),
+          // ),
         ],
       ),
     );
