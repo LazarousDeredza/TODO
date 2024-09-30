@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_app/data/data.dart';
+import 'package:todo_app/data/models/task_priority.dart';
 import 'package:todo_app/providers/providers.dart';
 
 class TaskNotifier extends StateNotifier<TaskState> {
@@ -32,6 +33,17 @@ class TaskNotifier extends StateNotifier<TaskState> {
     try {
       final isCompleted = !task.isCompleted;
       final updatedTask = task.copyWith(isCompleted: isCompleted);
+      await _repository.updateTask(updatedTask);
+      getTasks();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+
+Future<void> updatePriority(Task task, TaskPriority newPriority) async {
+    try {
+      final updatedTask = task.copyWith(priority: newPriority);
       await _repository.updateTask(updatedTask);
       getTasks();
     } catch (e) {
